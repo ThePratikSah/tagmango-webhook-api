@@ -91,11 +91,11 @@ export class TagmangoWebhookApiStack extends cdk.Stack {
         SPREADSHEET_ID: process.env.SPREADSHEET_ID || "",
       },
       timeout: cdk.Duration.seconds(30),
-      memorySize: 256,
+      memorySize: 128,
     });
 
     const sqsEventSource = new lambdaEventSources.SqsEventSource(webhookQueue, {
-      batchSize: 10,
+      batchSize: 1,
       maxBatchingWindow: cdk.Duration.seconds(60),
     });
     sqsConsumerLambda.addEventSource(sqsEventSource);
